@@ -1,0 +1,205 @@
+/* A shared motion language: entrances, tactile controls, and learning feedback. */
+:root {
+  --motion-out: cubic-bezier(.16, 1, .3, 1);
+  --motion-spring: cubic-bezier(.22, 1.25, .45, 1);
+}
+
+/* Short entrances run once when a block becomes visible. */
+.motion-ready [data-reveal] {
+  transform: translateY(18px);
+  transition: opacity .55s var(--motion-out), transform .55s var(--motion-out);
+}
+.motion-ready [data-reveal="left"] { transform: translate(-14px, 8px); }
+.motion-ready [data-reveal="right"] { transform: translate(14px, 8px); }
+.motion-ready [data-reveal="scale"] { transform: translateY(10px) scale(.98); }
+.motion-ready [data-reveal].is-visible { transform: none; }
+.step.is-visible .step-number { animation: numberArrive .55s .08s var(--motion-out) both; }
+.program-media .fox-art { animation: mascotSceneArrive .65s var(--motion-out) both; }
+
+/* Hero and secondary pages arrive in layers, without delaying interaction. */
+.inner-page > .back-link { animation: motionRise .5s var(--motion-out) both; }
+.inner-page .page-intro h1, .course-hero h1, .article-copy > h1, .privacy-page > h1 { animation: motionRise .75s .04s var(--motion-out) both; }
+.page-intro > p, .course-hero > div > p, .article-lead { animation: motionRise .75s .14s var(--motion-out) both; }
+.course-letter, .article-art > span { animation: paperArrive .9s .16s var(--motion-out) both; }
+.library-shortcuts > :nth-child(1) { animation: motionRise .65s .15s var(--motion-out) both; }
+.library-shortcuts > :nth-child(2) { animation: motionRise .65s .22s var(--motion-out) both; }
+.inner-page .material-card, [data-reveal].is-visible .material-card {
+  animation: cardArrive .7s calc(var(--card-index, 0) * 65ms) var(--motion-out) both;
+}
+.curriculum details[open] .curriculum-copy { animation: motionRise .4s var(--motion-out); }
+.exercise-answer, .empty-results { animation: motionRise .45s var(--motion-out); }
+
+/* Ongoing decorations are paused off screen and while the tab is hidden. */
+.practice:not(.is-in-view) .practice-signature svg { animation-play-state: paused; }
+.teacher-note { animation: none; }
+.teacher-image-wrap { position: absolute; inset: 0; overflow: hidden; border-radius: 25px; }
+.teachers.is-in-view .teacher-note { animation-play-state: running; }
+.eco-scribble { animation: none; }
+.ecosystem.is-in-view .eco-scribble { animation-play-state: running; }
+.practice-signature svg { animation-duration: 9s; }
+.motion-paused *, .motion-paused *::before, .motion-paused *::after { animation-play-state: paused !important; }
+
+/* One highlight physically follows choices, even when the buttons wrap. */
+.motion-choices { position: relative; isolation: isolate; }
+.choice-indicator {
+  position: absolute; top: 0; left: 0; z-index: -1; pointer-events: none;
+  width: var(--choice-w, 0px); height: var(--choice-h, 0px);
+  transform: translate(var(--choice-x, 0px), var(--choice-y, 0px));
+  background: var(--ink); border-radius: 40px; opacity: 0;
+  transition: transform .46s var(--motion-spring), width .4s var(--motion-out), height .4s var(--motion-out), opacity .15s;
+}
+.motion-choices[data-measured=true] > .choice-indicator { opacity: 1; }
+.motion-choices[data-measured=true] > button[aria-pressed=true] { background: transparent; }
+.club-topic-buttons > .choice-indicator { background: var(--purple); }
+.segmented-control > .choice-indicator { background: var(--paper); box-shadow: 0 2px 8px #20201f12; }
+.segmented-control[data-measured=true] > button[aria-pressed=true] { box-shadow: none; }
+.motion-choices > button { transition: color .2s, border-color .2s; }
+.teacher-style, .motion-panel { animation: contentSwap .48s var(--motion-out); }
+.teacher-style > p { animation: motionRise .5s .06s var(--motion-out) both; }
+.conversation-card { animation: conversationArrive .6s var(--motion-out); }
+.conversation-title { animation: motionRise .55s .06s var(--motion-out) both; }
+.conversation-card > h3 { animation: motionRise .6s .12s var(--motion-out) both; }
+.conversation-card > p { animation: motionRise .6s .18s var(--motion-out) both; }
+.conversation-prep-shell { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .45s var(--motion-out), opacity .35s; }
+.conversation-prep-shell[data-open=true] { grid-template-rows: 1fr; opacity: 1; }
+.conversation-prep-shell > .conversation-prep { min-height: 0; overflow: hidden; margin-top: 0; }
+.conversation-prep > strong:first-child { display: block; padding-top: 24px; }
+.conversation-hint.is-hidden { display: none; }
+.conversation-prep-shell[data-open=true] .phrase-chips > span { animation: chipArrive .45s .12s var(--motion-spring) both; }
+.conversation-prep-shell[data-open=true] .phrase-chips > span:nth-child(2) { animation-delay: .18s; }
+.conversation-prep-shell[data-open=true] .phrase-chips > span:nth-child(3) { animation-delay: .24s; }
+.animated-number { display: inline-block; font-variant-numeric: tabular-nums; min-width: 1ch; }
+.schedule-result > strong { min-width: 105px; }
+.quiz-score > .animated-number { font-size: inherit; color: inherit; }
+.story-card { --slide-direction: 1; }
+.story-card.slide-previous { --slide-direction: -1; }
+.story-phrase p { animation: storySlide .65s var(--motion-out) both; }
+.story-copy { animation: storySlide .65s .065s var(--motion-out) both; }
+.story-copy > div:nth-of-type(2) { animation: motionRise .6s .15s var(--motion-out) both; }
+
+/* A real two-sided card; both faces keep their own readable, unmirrored text. */
+.flashcard, .flashcard.is-flipped { display: block; padding: 0; background: transparent; perspective: 1100px; border-radius: 25px; min-height: 340px; }
+.flashcard-stage { display: block; transform-style: preserve-3d; animation: cardDeal .52s var(--motion-out) both; }
+.flashcard-rotor { display: grid; transform-style: preserve-3d; transition: transform .72s cubic-bezier(.2, .7, .15, 1); }
+.flashcard.is-flipped .flashcard-rotor { transform: rotateY(180deg); }
+.flashcard-face {
+  grid-area: 1 / 1; min-width: 0; min-height: 340px; width: 100%; padding: 35px;
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  border-radius: 25px; background: var(--lavender); backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.flashcard-back { background: var(--lime); transform: rotateY(180deg); }
+.flashcard-face > strong { font-size: clamp(32px, 4vw, 59px); letter-spacing: -.04em; line-height: 1.1; color: var(--purple); padding-block: 30px; }
+.flashcard-face[aria-hidden=true] { pointer-events: none; }
+.vocab-wrap progress::-webkit-progress-value { transition: width .5s var(--motion-out); }
+.vocab-wrap progress::-moz-progress-bar { transition: width .5s var(--motion-out); }
+
+/* Feedback rewards an action once. It never obscures text or captures input. */
+.answer-option.answer-correct { animation: correctAnswer .5s var(--motion-out); }
+.answer-correct .answer-letter svg, .success-check svg { stroke-dasharray: 38; animation: drawCheck .5s .1s both; }
+.answer-option.answer-incorrect { animation: gentleNudge .35s ease-out; }
+.practice-question, .quiz-question { animation: questionArrive .45s var(--motion-out); }
+.answer-options .answer-option { animation: motionRise .45s calc(var(--answer-index, 0) * 55ms) var(--motion-out) both; }
+.answer-options .answer-option:nth-of-type(2) { --answer-index: 1; }
+.answer-options .answer-option:nth-of-type(3) { --answer-index: 2; }
+.answer-options .answer-option.answer-correct { animation: correctAnswer .5s var(--motion-out); }
+.answer-options .answer-option.answer-incorrect { animation: gentleNudge .35s ease-out; }
+.practice-complete, .quiz-result, .vocab-complete, .contact-success { position: relative; }
+.success-check, .completion-icon, .vocab-complete > svg { animation: successPop .65s var(--motion-spring) both; }
+.success-burst { position: absolute; top: 24px; left: 50%; width: 0; height: 0; pointer-events: none; z-index: 2; }
+.success-burst i {
+  position: absolute; display: block; width: 5px; height: 10px; border-radius: 2px;
+  background: var(--purple); opacity: 0;
+  animation: successParticle .85s var(--burst-delay) cubic-bezier(.12, .6, .32, 1) both;
+}
+.success-burst i:nth-child(3n) { background: #9cab6e; border-radius: 50%; width: 7px; height: 7px; }
+.success-burst i:nth-child(3n + 1) { background: #b292e8; }
+.contact-form > label { transition: box-shadow .25s, background .25s; }
+/* A single quiet field state replaces the nested purple focus rings. */
+.contact-form > label:focus-within:not(.consent-label) { background: #fff; box-shadow: inset 0 -2px 0 #65645f; }
+.contact-form > label:not(.consent-label) :is(input, select, textarea):focus { outline: none; }
+.form-error { animation: gentleNudge .35s ease-out; }
+
+/* Hover effects belong only to devices that actually have a precise pointer. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  [data-tilt] {
+    position: relative;
+    transform: perspective(1100px) translateY(0) rotateX(0deg) rotateY(0deg);
+    transition: transform .32s var(--motion-out);
+  }
+  [data-tilt][data-pointer-active=true] {
+    transform: perspective(1100px) translateY(-5px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transition-duration: .16s;
+  }
+  .lesson-preview { --tilt-rest: 3deg; }
+  .teacher-visual { border-radius: 25px; }
+  .teacher-visual img { transform: scale(1.08) translateY(var(--scene-shift, 0px)); }
+  .story-asterisk { rotate: var(--scene-turn, 0deg); }
+  .footer-wordmark > svg { rotate: var(--scene-turn, 0deg); }
+  .material-cover > svg { transition: transform .4s var(--motion-spring); }
+  .material-card:hover .material-cover > svg { transform: translate(3px, -3px); }
+  .material-card:hover .material-read > svg { transform: translateX(6px); }
+  .material-read > svg { transition: transform .35s var(--motion-spring); }
+  .step { transition: translate .35s var(--motion-out); }
+  .step:hover { translate: 0 -5px; }
+  .step-number { transition: color .3s; }
+  .step:hover .step-number { color: var(--purple); }
+  .schedule-card { transition: translate .35s var(--motion-out); }
+  .schedule-card:hover { translate: 0 -4px; }
+  .program-panel:hover .text-link > svg { transform: translateX(4px); }
+  .round-link { transition: transform .35s var(--motion-spring), background .3s, color .3s; }
+  .round-link:hover { transform: rotate(-12deg) scale(1.08); background: var(--ink); color: var(--lime); }
+  .library-shortcuts > a, .library-shortcuts > button { transition: background .3s, translate .35s var(--motion-out), box-shadow .35s; }
+  .library-shortcuts > a:hover, .library-shortcuts > button:hover { translate: 0 -4px; box-shadow: 0 10px 24px #20201f08; }
+}
+.material-card:focus-visible .material-cover, .program-panel:focus-visible, .conversation-card:focus-within { outline: 2px solid var(--purple); outline-offset: 4px; }
+.material-card:focus-visible .material-read > svg, .text-link:focus-visible > svg { transform: translateX(4px); }
+.text-link > svg { transition: transform .3s var(--motion-spring); }
+.button, .icon-button, .menu-toggle, .round-link { transition: background .25s, color .25s, border-color .25s, transform .35s var(--motion-out), scale .18s; }
+.button:not(:disabled):active, .icon-button:active, .menu-toggle:active, .round-link:active { scale: .96; }
+.menu-open .mobile-nav > a, .menu-open .mobile-nav > button { animation: menuItem .45s calc(var(--menu-i, 0) * 35ms) var(--motion-out) both; }
+.mobile-nav > :nth-child(2) { --menu-i: 1; }.mobile-nav > :nth-child(3) { --menu-i: 2; }.mobile-nav > :nth-child(4) { --menu-i: 3; }
+.mobile-nav > :nth-child(5) { --menu-i: 4; }.mobile-nav > :nth-child(6) { --menu-i: 5; }.mobile-nav > :nth-child(7) { --menu-i: 6; }
+.course-dropdown { transform-origin: 40px top; animation: dropdownArrive .3s var(--motion-out); }
+.course-dropdown > a { animation: menuItem .3s var(--motion-out) both; }
+
+@keyframes motionRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes inkReveal { from { opacity: .1; clip-path: inset(0 100% -15% -5%); translate: 0 7px; } to { opacity: 1; clip-path: inset(-10% -5% -15% -5%); translate: 0 0; } }
+@keyframes numberArrive { from { opacity: 0; transform: translateY(14px) rotate(-12deg); } to { opacity: 1; transform: none; } }
+@keyframes paperArrive { from { opacity: 0; translate: 0 22px; rotate: 8deg; } to { opacity: 1; translate: 0 0; rotate: 0deg; } }
+@keyframes cardArrive { from { opacity: 0; translate: 0 23px; } to { opacity: 1; translate: 0 0; } }
+@keyframes teacherFloat { 0%, 100% { transform: translateY(0) rotate(-7deg); } 50% { transform: translateY(-8px) rotate(-5deg); } }
+@keyframes scribbleFloat { 0%, 100% { transform: translateY(0) rotate(-13deg); } 50% { transform: translateY(-5px) rotate(-9deg); } }
+@keyframes contentSwap { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes conversationArrive { from { opacity: 0; translate: 22px 10px; rotate: 1deg; } to { opacity: 1; translate: 0 0; rotate: 0deg; } }
+@keyframes chipArrive { from { opacity: 0; transform: translateY(8px) scale(.94); } to { opacity: 1; transform: none; } }
+@keyframes storySlide { from { opacity: 0; transform: translateX(calc(var(--slide-direction, 1) * 30px)); } to { opacity: 1; transform: none; } }
+@keyframes cardDeal { from { opacity: 0; transform: translateY(17px) rotate(-2deg) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes correctAnswer { 0% { scale: .985; } 50% { scale: 1.015; } 100% { scale: 1; } }
+@keyframes gentleNudge { 0%, 100% { translate: 0; } 25% { translate: -4px; } 65% { translate: 3px; } }
+@keyframes drawCheck { from { stroke-dashoffset: 38; } to { stroke-dashoffset: 0; } }
+@keyframes questionArrive { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: none; } }
+@keyframes successPop { from { opacity: 0; transform: scale(.6) rotate(-15deg); } to { opacity: 1; transform: none; } }
+@keyframes successParticle { 0% { opacity: 0; transform: translate(0, 0) scale(.3); } 12% { opacity: 1; } 72% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--burst-x), var(--burst-y)) rotate(var(--burst-rotate)) scale(.5); } }
+@keyframes menuItem { from { opacity: 0; transform: translateY(-7px); } to { opacity: 1; transform: none; } }
+@keyframes dropdownArrive { from { opacity: 0; transform: translateY(-7px) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes mascotSceneArrive { from { opacity: 0; transform: translateY(14px) scale(.96); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 600px) {
+  .motion-ready [data-reveal="left"], .motion-ready [data-reveal="right"] { transform: translateY(14px); }
+  .motion-ready [data-reveal].is-visible { transform: none; }
+  .flashcard, .flashcard.is-flipped, .flashcard-face { min-height: 310px; }
+  .flashcard-face { padding: 28px 22px; }
+  .flashcard-face > strong { font-size: 38px; }
+  .schedule-result > strong { min-width: 95px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Preserve state changes, including the back face, but remove motion entirely. */
+  .motion-ready [data-reveal] { opacity: 1; transform: none; }
+  .flashcard-stage, .flashcard-rotor, .flashcard.is-flipped .flashcard-rotor { transform: none; }
+  .flashcard-face { transform: none; }
+  .flashcard-face[aria-hidden=true] { visibility: hidden; }
+  .success-burst { display: none; }
+  .button:active, .icon-button:active, .menu-toggle:active, .round-link:active { scale: 1; }
+  .contact-form > label:focus-within { translate: 0; }
+  [data-tilt], .material-card:focus-visible .material-read > svg, .text-link:focus-visible > svg { transform: none; }
+}

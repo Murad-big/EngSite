@@ -1,0 +1,117 @@
+/* Each activity has its own beat. Only transform and opacity change in loops. */
+.fox-life-bubble {
+  position: absolute; padding: 8px 12px; border: 1.5px solid var(--purple); border-radius: 18px;
+  background: var(--paper); color: var(--purple); font-size: 14px; font-weight: 750; opacity: 0;
+}
+.fox-life-bubble::after {
+  content: ''; position: absolute; bottom: -5px; left: 14px; width: 8px; height: 8px;
+  background: var(--paper); border-right: 1.5px solid var(--purple); border-bottom: 1.5px solid var(--purple); rotate: 45deg;
+}
+.fox-life-hello { top: 12%; left: 0; }
+.fox-life-reply { top: 29%; right: 0; }
+.fox-life-reply::after { left: auto; right: 14px; }
+.fox-work-typing { position: absolute; top: 59%; right: 5%; display: flex; gap: 4px; }
+.fox-work-typing i { width: 5px; height: 5px; border-radius: 50%; background: var(--purple); opacity: 0; }
+.fox-work-mail { position: absolute; top: 32%; right: 5%; width: 43px; color: var(--purple); opacity: 0; }
+.fox-work-mail svg, .fox-study-star svg, .fox-mentor-wave svg { display: block; width: 100%; }
+.fox-study-letters { position: absolute; top: 23%; left: 1%; display: flex; gap: 4px; }
+.fox-study-letter { display: grid; place-items: center; width: 26px; height: 33px; border-radius: 6px; background: var(--paper); border: 1px solid #bda8ef; color: var(--purple); font-size: 18px; font-weight: 800; opacity: 0; }
+.fox-study-star { position: absolute; top: 18%; right: 8%; width: 27px; opacity: 0; }
+.fox-mentor-wave { position: absolute; top: 31%; left: 4%; width: 34px; color: var(--purple); opacity: 0; }
+.fox-mentor-equalizer { position: absolute; top: 43%; right: 5%; height: 34px; display: flex; align-items: center; gap: 5px; }
+.fox-mentor-equalizer i { width: 4px; height: 25px; border-radius: 4px; background: var(--purple); transform-origin: center; opacity: .5; }
+.fox-mentor-equalizer i:nth-child(2) { height: 34px; }.fox-mentor-equalizer i:nth-child(4) { height: 18px; }
+
+@keyframes foxLifeChat {
+  0%, 12%, 52%, 100% { transform: translateY(0) rotate(0deg); }
+  26% { transform: translateY(-3px) rotate(-1.2deg); }
+  38% { transform: translateY(0) rotate(1deg); }
+  72% { transform: translateY(-2px) rotate(-.5deg); }
+}
+@keyframes foxLifeHello {
+  0%, 8% { opacity: 0; transform: translateY(12px) scale(.8); }
+  17%, 43% { opacity: 1; transform: translateY(0) scale(1); }
+  56%, 100% { opacity: 0; transform: translateY(-9px) scale(.96); }
+}
+@keyframes foxLifeReply {
+  0%, 32% { opacity: 0; transform: translateY(12px) scale(.8); }
+  43%, 69% { opacity: 1; transform: translateY(0) scale(1); }
+  83%, 100% { opacity: 0; transform: translateY(-9px) scale(.96); }
+}
+@keyframes foxWorkType {
+  0%, 10%, 20%, 30%, 40%, 55%, 100% { transform: translateY(0) rotate(0deg); }
+  15%, 25%, 35% { transform: translateY(2px) rotate(-.6deg); }
+  64% { transform: translateY(-3px) rotate(1deg); }
+}
+@keyframes foxTypingDot {
+  0%, 8%, 45%, 100% { opacity: 0; transform: translateY(0); }
+  14%, 24%, 34% { opacity: .8; transform: translateY(-3px); }
+  19%, 29%, 39% { opacity: .35; transform: translateY(0); }
+}
+@keyframes foxMailSent {
+  0%, 42% { opacity: 0; transform: translateY(24px) scale(.75) rotate(-6deg); }
+  53%, 67% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+  83%, 100% { opacity: 0; transform: translateY(-40px) scale(.85) rotate(7deg); }
+}
+@keyframes foxStudyRead {
+  0%, 30%, 58%, 100% { transform: translateY(0) rotate(0deg); }
+  14% { transform: translateY(2px) rotate(-1deg); }
+  44% { transform: translateY(-3px) rotate(1deg); }
+  76% { transform: translateY(-2px) rotate(-.5deg); }
+}
+@keyframes foxLetterLearn {
+  0%, 5% { opacity: 0; transform: translate(17px, 65px) rotate(-12deg) scale(.8); }
+  25%, 55% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
+  77%, 100% { opacity: 0; transform: translate(0, -20px) rotate(5deg) scale(.92); }
+}
+@keyframes foxStudySpark {
+  0%, 40%, 90%, 100% { opacity: 0; transform: scale(.6) rotate(-15deg); }
+  53%, 70% { opacity: 1; transform: scale(1) rotate(12deg); }
+}
+@keyframes foxMentorListen {
+  0%, 48%, 100% { transform: translateY(0) rotate(0deg); }
+  21% { transform: translateY(-3px) rotate(1.2deg); }
+  69% { transform: translateY(-2px) rotate(-1deg); }
+}
+@keyframes foxMentorWave {
+  0%, 7%, 53%, 100% { opacity: 0; transform: scale(.82); }
+  20% { opacity: .65; transform: scale(1); }
+  42% { opacity: 0; transform: scale(1.15); }
+  65% { opacity: .65; transform: scale(.95); }
+  90% { opacity: 0; transform: scale(1.15); }
+}
+@keyframes foxMentorVoice {
+  0%, 48%, 100% { transform: scaleY(.4); opacity: .35; }
+  17%, 66% { transform: scaleY(1); opacity: .75; }
+  30%, 81% { transform: scaleY(.6); opacity: .5; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fox-conversation-character { animation: foxLifeChat 6.5s ease-in-out infinite; }
+  .fox-life-hello { animation: foxLifeHello 6.5s var(--motion-out) infinite; }
+  .fox-life-reply { animation: foxLifeReply 6.5s var(--motion-out) infinite; }
+  .fox-laptop-character { animation: foxWorkType 6s ease-in-out infinite; }
+  .fox-work-typing i { animation: foxTypingDot 6s ease-in-out infinite; }
+  .fox-work-typing i:nth-child(2) { animation-delay: .14s; }.fox-work-typing i:nth-child(3) { animation-delay: .28s; }
+  .fox-work-mail { animation: foxMailSent 6s var(--motion-out) infinite; }
+  .fox-study-character { animation: foxStudyRead 7s ease-in-out infinite; }
+  .fox-study-letter { animation: foxLetterLearn 7s var(--motion-out) infinite; }
+  .fox-study-letter:nth-child(2) { animation-delay: .2s; }.fox-study-letter:nth-child(3) { animation-delay: .4s; }
+  .fox-study-star { animation: foxStudySpark 7s var(--motion-out) infinite; }
+  .fox-mentor-character { animation: foxMentorListen 6s ease-in-out infinite; }
+  .fox-mentor-wave { animation: foxMentorWave 6s ease-out infinite; }
+  .fox-mentor-equalizer i { animation: foxMentorVoice 3s ease-in-out infinite; }
+  .fox-mentor-equalizer i:nth-child(2) { animation-delay: -.4s; }.fox-mentor-equalizer i:nth-child(3) { animation-delay: -.8s; }.fox-mentor-equalizer i:nth-child(4) { animation-delay: -1.2s; }
+  .fox-art .fox-scene-motion { animation-play-state: paused; }
+  .fox-art.is-in-view .fox-scene-motion { animation-play-state: running; }
+}
+@media (max-width: 740px) {
+  .fox-life-bubble { font-size: 12px; padding: 6px 9px; }
+  .fox-study-letters { gap: 3px; }.fox-study-letter { width: 21px; height: 27px; font-size: 15px; }
+  .fox-work-mail { width: 33px; }.fox-mentor-wave { width: 28px; }
+  .fox-mentor-equalizer { gap: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fox-scene-character { transform: none; }
+  .fox-scene-decor { display: none; }
+}

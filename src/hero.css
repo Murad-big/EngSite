@@ -1,0 +1,130 @@
+/* Compact editorial hero. All motion stays on compositor-friendly properties. */
+.hero { padding-top: 12px; overflow: clip; }
+.hero-layout { display: grid; grid-template-columns: 1fr 1.08fr; align-items: center; gap: clamp(32px,4.5vw,76px); max-width: 1400px; padding-block: clamp(38px,4.6vw,70px) 65px; }
+.hero-copy { min-width: 0; }
+.hero-title { font-size: clamp(48px,5.4vw,84px); font-weight: 800; line-height: 1.04; letter-spacing: -.064em; }
+.hero-title { width: fit-content; max-width: 100%; }
+.hero-title .line-centered > span, .hero-title .line:last-child > span { text-align: center; }
+.hero-title .line { display: block; overflow: clip; padding: .08em .08em .19em 0; margin: -.08em -.08em -.19em 0; }
+.hero-title .line > span { display: block; animation: heroHeadline .95s var(--motion-out) both; }
+.hero-title .line:nth-child(2) > span { animation-delay: .09s; }
+.hero-title .line:nth-child(3) > span { animation-delay: .18s; }
+.hero-title em { display: inline-block; font-size: 1.24em; line-height: .95; }
+.hero-intro { margin-top: 28px; animation: motionRise .85s .3s var(--motion-out) both; }
+.hero-intro p { max-width: 420px; font-size: 17px; line-height: 1.65; letter-spacing: -.025em; }
+.hero-intro .button { min-height: 60px; margin-top: 27px; padding-inline: 27px; font-size: 15px; gap: 25px; }
+.hero-caption { max-width: 1400px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); padding-block: 14px; animation: motionRise .8s .45s var(--motion-out) both; }
+.hero-caption p { font-family: var(--serif); font-style: italic; font-size: 22px; }
+.scroll-link { display: grid; place-items: center; width: 40px; height: 40px; flex-shrink: 0; color: var(--purple); transition: transform .3s; }
+.scroll-link:hover { transform: translateY(5px); }
+
+@keyframes heroHeadline { from { opacity: 0; transform: translateY(110%) rotate(2deg); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 1050px) and (min-width: 741px) {
+  .hero-layout { gap: 30px; padding-block: 55px; }
+  .hero-title { font-size: clamp(42px,5.35vw,57px); }
+  .hero-intro { margin-top: 21px; }
+  .hero-intro p { font-size: 15px; }
+  .hero-intro .button { font-size: 13px; padding-inline: 20px; min-height: 54px; gap: 15px; margin-top: 22px; }
+}
+@media (max-width: 740px) {
+  .hero { padding-top: 0; }
+  .hero-layout { grid-template-columns: 1fr; gap: 18px; max-width: 540px; padding-block: 29px 26px; }
+  .hero-title { font-size: clamp(42px,9.3vw,64px); line-height: 1.01; }
+  .hero-title em { font-size: 1.21em; }
+  .hero-intro { margin-top: 18px; }
+  .hero-intro p { font-size: 15px; line-height: 1.6; max-width: 370px; }
+  .hero-intro .button { min-height: 54px; padding: 15px 24px; font-size: 14px; margin-top: 20px; }
+  .hero-caption { max-width: 540px; padding-block: 10px; }
+  .hero-caption p { font-size: 17px; }
+  .scroll-link { width: 30px; height: 36px; }
+  .scroll-link svg { width: 20px; }
+}
+
+/* The drop and the character share a landing point. No frame-by-frame React updates. */
+.hero-mascot { min-width: 0; align-self: center; --arrival: .12s; }
+.mascot-scene { position: relative; height: 450px; isolation: isolate; }
+.mascot-puddle { position: absolute; bottom: 16px; left: 6%; width: 88%; height: 64px; border-radius: 50%; background: var(--lavender); }
+.mascot-shadow { position: absolute; bottom: 38px; left: 29%; width: 42%; height: 24px; border-radius: 50%; background: #6d4caa25; filter: blur(9px); }
+.mascot-character { position: absolute; bottom: 37px; left: 10%; width: 77%; max-width: 440px; padding: 0; border: 0; background: transparent; border-radius: 45%; transform-origin: 50% 95%; -webkit-tap-highlight-color: transparent; }
+.mascot-character:focus-visible { outline: none; }
+.mascot-character:focus-visible::after { content: ''; position: absolute; bottom: -13px; left: 30%; width: 40%; height: 2px; border-radius: 2px; background: var(--ink); }
+.hero-mascot:has(.mascot-character:focus-visible) .mascot-hint { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.mascot-arrival, .mascot-idle { display: block; transform-origin: 50% 95%; }
+.mascot-character img { width: 100%; height: auto; pointer-events: none; user-select: none; }
+.mascot-greeting { position: absolute; z-index: 2; right: 1%; top: 0; padding: 17px 24px; background: var(--paper); border: 1.5px solid var(--purple); border-radius: 40% 45% 42% 30% / 45% 47% 40% 40%; text-align: center; transform-origin: 12% 100%; pointer-events: none; }
+.mascot-greeting::after { content: ''; position: absolute; width: 20px; height: 21px; bottom: -13px; left: 23px; background: var(--paper); border-left: 1.5px solid var(--purple); border-bottom: 1.5px solid var(--purple); transform: skew(-26deg,-30deg); border-radius: 0 0 0 4px; }
+.mascot-greeting strong { display: block; color: var(--purple); font-size: 25px; font-weight: 800; letter-spacing: -.035em; }
+.mascot-greeting > span { display: block; font-size: 14px; margin-top: 3px; }
+.mascot-drop { position: absolute; z-index: 3; width: 76px; height: 110px; left: calc(50% - 38px); bottom: 46px; border-radius: 50% 50% 46% 46% / 72% 72% 28% 28%; background: radial-gradient(ellipse at 30% 23%, #b898ff, #8156ef 50%, #5c35c9); opacity: 0; transform-origin: 50% 95%; pointer-events: none; }
+.mascot-drop > span { position: absolute; left: 17px; top: 24px; width: 10px; height: 32px; background: #ffffff60; border-radius: 50%; rotate: 16deg; }
+.mascot-ripple { position: absolute; bottom: 25px; left: 15%; width: 70%; height: 55px; border: 2px solid #a68ce7; border-radius: 50%; opacity: 0; pointer-events: none; }
+.mascot-spark { position: absolute; left: 9%; top: 39%; width: 35px; height: 55px; pointer-events: none; }
+.mascot-spark i { position: absolute; left: 0; top: 25px; width: 24px; height: 6px; background: #c9e581; border-radius: 10px; }
+.mascot-spark i:first-child { top: 3px; left: 7px; rotate: 44deg; }
+.mascot-spark i:last-child { top: 47px; left: 7px; rotate: -44deg; }
+.mascot-hint { text-align: center; color: var(--muted); font-size: 11px; line-height: 1.5; margin-top: 8px; }
+.hero-mascot[data-ready=false] :is(.mascot-character,.mascot-greeting,.mascot-spark,.mascot-hint) { opacity: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-mascot[data-ready=true] .mascot-drop { animation: dropArrival 1.18s var(--arrival) linear both; }
+  .hero-mascot[data-ready=true] .mascot-arrival { animation: foxAppear 1.05s calc(var(--arrival) + .82s) var(--motion-out) both; }
+  .hero-mascot[data-ready=true] .mascot-idle { animation: foxHello 1.5s calc(var(--arrival) + 1.85s) ease-in-out both; }
+  .hero-mascot[data-ready=true] .mascot-ripple { animation: landingRipple .8s calc(var(--arrival) + .77s) ease-out both; }
+  .hero-mascot[data-ready=true] .mascot-shadow { animation: landingShadow 1.9s var(--arrival) ease-out both; }
+  .hero-mascot[data-ready=true] .mascot-greeting { animation: greetingPop .6s calc(var(--arrival) + 1.7s) var(--motion-spring) both; }
+  .hero-mascot[data-ready=true] .mascot-spark { animation: greetingPop .6s calc(var(--arrival) + 1.95s) var(--motion-spring) both; }
+  .hero-mascot[data-ready=true] .mascot-hint { animation: motionRise .6s calc(var(--arrival) + 2.1s) var(--motion-out) both; }
+}
+@keyframes dropArrival {
+  0% { opacity: 0; transform: translateY(-500px) scale(.6,1.5); }
+  8% { opacity: 1; transform: translateY(-490px) scale(.6,1.5); }
+  40% { transform: translateY(-325px) scale(.72,1.4); }
+  66% { transform: translateY(0) scale(.85,1.35); opacity: 1; }
+  76% { transform: translateY(9px) scale(2.15,.36); opacity: 1; }
+  87% { transform: translateY(-18px) scale(1.4,1.15); opacity: .6; }
+  100% { transform: translateY(-40px) scale(2); opacity: 0; }
+}
+@keyframes foxAppear {
+  0% { opacity: 0; transform: translateY(27px) scale(.2,.12); }
+  16% { opacity: 1; transform: translateY(18px) scale(.72,.52); }
+  45% { opacity: 1; transform: translateY(-24px) scale(.96,1.03) rotate(-5deg); }
+  68% { transform: translateY(5px) scale(1.06,.93) rotate(2deg); }
+  84% { transform: translateY(-10px) scale(.98,1.02) rotate(-1deg); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes foxHello { 0%,100% { transform: rotate(0); } 22% { transform: rotate(-5deg); } 45% { transform: rotate(4deg); } 68% { transform: rotate(-3deg); } 85% { transform: rotate(2deg); } }
+@keyframes landingRipple { 0% { opacity: 0; transform: scale(.1); } 20% { opacity: .7; } 100% { opacity: 0; transform: scale(1.2); } }
+@keyframes landingShadow { 0% { opacity: .2; transform: scale(.25); } 48% { opacity: 1; transform: scale(1.2); } 68% { opacity: .35; transform: scale(.65); } 100% { opacity: 1; transform: none; } }
+@keyframes greetingPop { 0% { opacity: 0; transform: translateY(10px) scale(.65) rotate(-8deg); } 100% { opacity: 1; transform: none; } }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .mascot-character img { transition: scale .35s var(--motion-spring); }
+  .mascot-character:hover img { scale: 1.035; }
+}
+@media (max-width: 1050px) and (min-width: 741px) {
+  .mascot-scene { height: 400px; }
+  .mascot-character { width: 95%; max-width: 340px; left: 50%; translate: -50% 0; }
+  .mascot-greeting { right: -4px; top: -9px; padding: 12px 18px; }
+  .mascot-greeting strong { font-size: 20px; }
+  .mascot-greeting > span { font-size: 12px; }
+  .mascot-hint { max-width: 230px; margin-inline: auto; }
+}
+@media (max-width: 740px) {
+  .mascot-scene { height: 290px; max-width: 360px; margin-inline: auto; }
+  .mascot-character { width: 245px; max-width: 85%; left: 5%; bottom: 24px; }
+  .mascot-puddle { height: 38px; bottom: 12px; }
+  .mascot-shadow { bottom: 24px; height: 16px; }
+  .mascot-greeting { padding: 11px 16px; top: 10px; right: 0; }
+  .mascot-greeting strong { font-size: 19px; }
+  .mascot-greeting > span { font-size: 11px; }
+  .mascot-greeting::after { width: 15px; height: 16px; bottom: -10px; left: 20px; }
+  .mascot-drop { bottom: 29px; width: 54px; height: 79px; left: calc(50% - 27px); }
+  .mascot-drop > span { left: 12px; top: 18px; width: 7px; height: 23px; }
+  .mascot-spark { left: 0; top: 47%; scale: .65; }
+  .mascot-ripple { bottom: 15px; height: 35px; }
+  .mascot-hint { font-size: 10px; margin-top: 1px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mascot-drop, .mascot-ripple { display: none; }
+  .mascot-arrival, .mascot-idle, .mascot-greeting { transform: none; }
+}

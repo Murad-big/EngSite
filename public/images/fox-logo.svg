@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>EasyEnglish — лисёнок и разговор</title>
+  <path fill="#6845ef" d="M10 30 7 10Q6 5 12 8L26 19Q32 17 38 19L52 8Q58 5 57 11L54 30Q60 39 53 47Q49 52 43 54L44 61 31 55Q14 55 8 44Q4 36 10 30Z"/>
+  <path fill="#c5adff" d="m13 14 10 10-9 4Zm38 0-10 10 9 4Z"/>
+  <path fill="#faf6ed" d="M11 35Q20 31 27 39L32 44 37 39Q44 31 53 35Q51 49 32 51 13 49 11 35Z"/>
+  <g fill="#30244c"><ellipse cx="22" cy="32" rx="3" ry="4"/><ellipse cx="42" cy="32" rx="3" ry="4"/><path d="M27 40Q32 37 37 40L33 44Q32 45 31 44Z"/></g>
+  <g fill="#fff"><circle cx="23" cy="30.5" r="1"/><circle cx="43" cy="30.5" r="1"/></g>
+  <path d="M27 46Q32 50 37 46" fill="none" stroke="#30244c" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

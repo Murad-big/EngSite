@@ -1,0 +1,128 @@
+/* Shorter section rhythm, with enough room for text, controls and mascot motion. */
+.header-inner { min-height: 82px; gap: 22px; }
+.page-loading { padding-block: 60px; min-height: 60vh; color: var(--muted); }
+body { overflow-x: clip; }
+html { scroll-padding-top: 100px; }
+.section { padding-top: clamp(44px,5vw,72px); }
+.section[id] { scroll-margin-top: 0; }
+.section-heading { margin-bottom: 28px; }
+.section-label { margin-bottom: 20px; }
+.hero { padding-top: 6px; }
+.hero-layout { padding-block: 24px 28px; gap: clamp(24px,4vw,58px); }
+.hero-title { font-size: clamp(48px,5.2vw,76px); }
+.hero-intro { margin-top: 21px; }
+.hero-intro .button { margin-top: 21px; min-height: 55px; }
+.mascot-scene { height: 400px; }
+.mascot-character { bottom: 30px; width: 80%; max-width: 360px; left: 50%; translate: -50% 0; }
+.mascot-puddle { bottom: 12px; height: 48px; }
+.mascot-shadow { bottom: 31px; }
+.mascot-greeting { top: 10px; right: 4%; padding: 14px 20px; }
+.mascot-greeting strong { font-size: 23px; }
+.mascot-greeting > span { font-size: 12px; }
+.hero-caption { padding-block: 10px; }
+.program-panel { min-height: 360px; padding: 26px; gap: 26px; }
+.program-content { padding: 8px; }
+.program-content > p { font-size: 17px; margin-top: 18px; }
+.program-media { min-height: 320px; }
+.program-note { font-size: 26px; padding: 15px 19px; right: 0; }
+.teacher-layout { gap: 44px; }
+.teacher-visual { min-height: 360px; height: 390px; align-self: center; }
+.teacher-copy h2 { font-size: clamp(44px,4.6vw,65px); }
+.teacher-copy > p { font-size: 16px; margin-top: 18px; }
+.teacher-options { margin-block: 21px 17px; }
+.teacher-style { min-height: 102px; }
+.teacher-note { font-size: 29px; padding: 17px; right: 10px; bottom: 8px; }
+.club-band { padding: 40px; gap: 40px; }
+.format-layout { gap: 38px; }
+.practice { margin-top: 64px; padding-block: 52px; }
+.story-phrase { min-height: 300px; padding: 32px; }
+.story-copy { padding: 32px; }
+.site-footer { padding-top: 54px; }
+.footer-links { margin-bottom: 24px; }
+.footer-wordmark { font-size: clamp(58px,11vw,166px); padding-block: 15px 24px; }
+.inner-page { padding-block: 24px 40px; }
+.back-link { margin-bottom: 22px; }
+.course-hero { padding: 36px; gap: 32px; }
+.course-hero > div { min-width: 0; }
+.course-hero h1 { margin-top: 16px; font-size: clamp(42px,5.1vw,73px); }
+.course-hero p { margin-top: 18px; font-size: 16px; }
+.pill-row { margin-block: 18px 22px; }
+.course-body { display: block; margin-top: 36px; }
+.course-body-heading { display: flex; justify-content: space-between; align-items: center; gap: 32px; margin-bottom: 24px; }
+.course-body h2 { font-size: clamp(29px,3.2vw,44px); }
+.course-body-heading > div > p { font-size: 14px; color: var(--muted); line-height: 1.6; margin-top: 12px; }
+.course-outcome { margin: 0; padding: 17px 20px; max-width: 420px; flex: 0 1 38%; align-items: center; }
+.curriculum summary { padding: 18px 0; }
+.curriculum-copy { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 0 0 20px 38px; }
+.curriculum-copy strong { margin: 0 0 7px; }
+.curriculum-copy p { line-height: 1.65; }
+.inner-cta { margin-top: 32px; padding: 28px; }
+.inner-cta h2 { font-size: 34px; }
+@media (min-width: 741px) and (max-width: 1050px) {
+  .hero-layout { padding-block: 24px; }
+  .hero-title { font-size: clamp(42px,5.2vw,55px); }
+  .mascot-scene { height: 330px; }
+  .mascot-character { width: 90%; max-width: 280px; }
+  .mascot-greeting { top: 0; right: 0; padding: 11px 15px; }
+  .mascot-greeting strong { font-size: 19px; }
+  .mascot-greeting > span { font-size: 11px; }
+  .program-panel { gap: 18px; padding: 20px; }
+  .program-note { font-size: 20px; padding: 10px 12px; top: 0; }
+  .program-note .note-smile { margin-top: 6px; }
+  .teacher-layout { gap: 28px; }
+  .teacher-visual { display: flex; flex-direction: column; min-height: 0; height: auto; }
+  .teacher-image-wrap { position: relative; width: 100%; height: 340px; flex: none; }
+  .teacher-note { position: relative; font-size: 24px; padding: 12px 16px; right: auto; bottom: auto; margin-top: -12px; align-self: flex-end; }
+}
+@media (max-width: 900px) {
+  .header-inner { min-height: 70px; }
+  .mobile-nav { top: 70px; max-height: calc(100dvh - 70px); }
+  .club-band { padding: 28px; }
+}
+@media (max-width: 740px) {
+  .header-inner { min-height: 68px; gap: 12px; }
+  .mobile-nav { top: 68px; max-height: calc(100dvh - 68px); }
+  html { scroll-padding-top: 86px; }
+  .hero-layout { gap: 10px; padding-block: 20px 18px; }
+  .hero-title { font-size: clamp(40px,9.3vw,59px); }
+  .hero-intro { margin-top: 15px; }
+  .hero-intro .button { margin-top: 17px; min-height: 51px; padding: 14px 21px; }
+  .mascot-scene { height: 255px; max-width: 330px; }
+  .mascot-character { width: 220px; max-width: 82%; bottom: 19px; left: 43%; }
+  .mascot-greeting { top: 6px; right: 0; padding: 10px 14px; }
+  .mascot-greeting strong { font-size: 18px; }
+  .mascot-greeting > span { font-size: 10px; }
+  .mascot-puddle { height: 33px; bottom: 9px; }
+  .mascot-hint { font-size: 10px; }
+  .section { padding-top: 42px; }
+  .section-heading, .approach .section-heading { margin-bottom: 24px; }
+  .section-label { margin-bottom: 16px; }
+  .program-panel { padding: 20px; gap: 16px; min-height: 0; }
+  .program-content { padding: 0; }
+  .program-media { min-height: 245px; }
+  .program-note { font-size: 18px; padding: 10px 12px; top: 0; }
+  .program-note .note-smile { margin-top: 6px; }
+  .teacher-layout { gap: 24px; }
+  .teacher-visual { display: flex; flex-direction: column; min-height: 0; height: auto; }
+  .teacher-image-wrap { position: relative; width: 100%; height: 285px; flex: none; }
+  .teacher-copy h2 { font-size: 43px; }
+  .teacher-note { position: relative; font-size: 22px; padding: 12px 16px; right: auto; bottom: auto; margin-top: -12px; align-self: flex-end; }
+  .teacher-style { min-height: 0; }
+  .club-band { padding: 24px 20px; gap: 24px; }
+  .practice { margin-top: 42px; padding-block: 34px; }
+  .story-phrase { min-height: 220px; padding: 25px; }
+  .story-copy { padding: 25px; }
+  .site-footer { padding-top: 36px; }
+  .footer-wordmark { font-size: clamp(36px,9.8vw,68px); gap: 10px; }
+  .footer-logo { width: 58px; }
+  .course-hero { padding: 25px 22px; gap: 20px; }
+  .course-hero h1 { font-size: clamp(31px,9.6vw,42px); }
+  .course-hero .button { width: 100%; padding-inline: 15px; gap: 12px; font-size: 14px; }
+  .course-body-heading { display: block; margin-bottom: 20px; }
+  .course-outcome { max-width: none; margin-top: 17px; }
+  .curriculum summary { gap: 13px; }
+  .curriculum h3 { font-size: 18px; }
+  .curriculum-copy { display: block; padding-left: 28px; }
+  .curriculum-task { margin-top: 14px; }
+  .inner-cta { padding: 24px 20px; }
+}
